@@ -19,9 +19,9 @@ class TabBarController: UITabBarController {
         let pokedexView = ModuleBuilder.shared.PokemonListBuild()
         pokedexView.tabBarItem = UITabBarItem(title: "Pokemon List", image: nil, tag: 0)
 
-        /*let itemsView = ItemListBuilder.build()
-        itemsView.tabBarItem = UITabBarItem(title: "My Pokemon List", image: UIImage(named: "items-icon"), tag: 1)*/
-        setViewControllers([pokedexView/*, itemsView*/], animated: false)
+        let myPokemon = ModuleBuilder.shared.MyPokemonBuild()
+        myPokemon.tabBarItem = UITabBarItem(title: "My Pokemon", image: nil, tag: 1)
+        setViewControllers([pokedexView, myPokemon], animated: false)
     }
 
 }

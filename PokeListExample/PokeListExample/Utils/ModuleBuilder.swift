@@ -37,6 +37,13 @@ class ModuleBuilder {
         navigationController.setNavbarApp(color: color)
         return navigationController
     }
+    
+    func MyPokemonBuild() -> UINavigationController {
+        let viewController = MyPokemonController()
+        let navigationController = NavigationController(rootViewController: viewController)
+        navigationController.setNavbarApp(color: .cyan)
+        return navigationController
+    }
 }
 
 ///ModuleBuilder.shared.createEditProfileNewViewController()
