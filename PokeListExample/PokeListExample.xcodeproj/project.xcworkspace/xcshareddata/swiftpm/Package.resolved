@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "networking",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/brillcp/Networking.git",
+      "state" : {
+        "revision" : "dadd7920c69e52ff4728c9cf5f4dd75523123bdd",
+        "version" : "0.8.9"
+      }
+    }
+  ],
+  "version" : 2
+}
