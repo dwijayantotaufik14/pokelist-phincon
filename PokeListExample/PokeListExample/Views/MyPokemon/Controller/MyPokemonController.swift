@@ -21,14 +21,21 @@ class MyPokemonController: UIViewController {
         collectionView.dataSource = self
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        pokemonArr = fetchPokemon()
+        collectionView.reloadData()
+    }
+    
     func configureUI() {
-         let width = view.frame.size.width
-         let height = view.frame.size.height
+        let width = view.frame.size.width
+        let height = view.frame.size.height
         view.backgroundColor = .systemGray6
         layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
         layout.itemSize = CGSize(width: width / 2 - 20, height: height / 3 - 50)
         collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
         collectionView.register(MyPokemonCollectionViewCell.self, forCellWithReuseIdentifier: K.MyPokemonCell)
+        collectionView.translatesAutoresizingMaskIntoConstraints = true
         
         view.addSubview(collectionView)
     }
@@ -46,8 +53,9 @@ class MyPokemonController: UIViewController {
             for result in results as! [NSManagedObject] {
                 let nickname = result.value(forKey: K.CoreData.nickname) as! String
                 let data = result.value(forKey: K.CoreData.image) as! Data
+                let renameCount = result.value(forKey: K.CoreData.renameCount) as! Int
                 let image = UIImage(data: data)
-                let dict : [String : Any] = [K.CoreData.nickname : nickname, K.CoreData.image: image!]
+                let dict : [String : Any] = [K.CoreData.nickname : nickname, K.CoreData.image: image!, K.CoreData.renameCount: renameCount]
                 let poke = MyPokemonModel(data: dict)
                 arr.append(poke)
             }
@@ -68,9 +76,14 @@ extension MyPokemonController: UICollectionViewDelegate, UICollectionViewDataSou
       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: K.MyPokemonCell, for: indexPath) as! MyPokemonCollectionViewCell
             let pokemon = pokemonArr[indexPath.row]
         cell.configureCell(name: pokemon.nickname, image: pokemon.image)
+        cell.delegate = self
         return cell
     }
-    
-    
 }
 
+extension MyPokemonController: MyPokemonCellDelegate {
+    func succedUpdate() {
+        self.pokemonArr = fetchPokemon()
+        collectionView.reloadData()
+    }
+}

@@ -3,5 +3,6 @@
     <entity name="SavedPokemon" representedClassName="SavedPokemon" syncable="YES" codeGenerationType="class">
         <attribute name="image" optional="YES" attributeType="Binary"/>
         <attribute name="nickname" optional="YES" attributeType="String"/>
+        <attribute name="renameCount" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
 </model>

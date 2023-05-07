@@ -15,5 +15,6 @@ struct K {
         static let Entity = "SavedPokemon"
         static let nickname = "nickname"
         static let image = "image"
+        static let renameCount = "renameCount"
     }
 }

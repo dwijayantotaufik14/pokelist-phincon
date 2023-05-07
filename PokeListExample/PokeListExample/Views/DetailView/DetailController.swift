@@ -156,6 +156,7 @@ final class DetailController: ViewController<DetailView>, UITextFieldDelegate {
             let data = image.jpegData(compressionQuality: 1)
             pokemon.setValue(nickname, forKey: K.CoreData.nickname)
             pokemon.setValue(data, forKey: K.CoreData.image)
+            pokemon.setValue(0, forKey: K.CoreData.renameCount)
             try context.save()
             completion("Pokemon added to favorites")
         } catch  {

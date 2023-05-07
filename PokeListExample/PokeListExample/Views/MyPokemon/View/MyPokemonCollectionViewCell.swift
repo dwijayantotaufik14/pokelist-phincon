@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol MyPokemonCellDelegate {
+    func succedUpdate()
+}
+
 final class MyPokemonCollectionViewCell: UICollectionViewCell {
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
@@ -54,6 +58,8 @@ final class MyPokemonCollectionViewCell: UICollectionViewCell {
         return stack
     }()
     
+    var delegate: MyPokemonCellDelegate?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .systemGray4
@@ -65,11 +71,24 @@ final class MyPokemonCollectionViewCell: UICollectionViewCell {
     }
     
     @objc func releasebtnAction(_ sender: UIButton) {
-        print("RELEASE")
+        
+        if self.checkingPrimeNumber(num: self.generateRandomNumber()) {
+            print("RELEASE")
+        }else{
+            print("FAILED")
+        }
+        
     }
     
     @objc func renamebtnAction(_ sender: UIButton) {
-        print("RENAME")
+        self.updatePokemonNickname(nickName: self.nameLabel.text!) { string in
+            if string == "saved" {
+                print("SUCCED")
+                self.delegate?.succedUpdate()
+            }else{
+                print("FAILED")
+            }
+        }
     }
     
     func configureCell(name: String, image: UIImage) {
