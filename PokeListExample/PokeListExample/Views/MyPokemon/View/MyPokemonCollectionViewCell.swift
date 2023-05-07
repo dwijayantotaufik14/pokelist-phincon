@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Toast
 
 protocol MyPokemonCellDelegate {
     func succedUpdate()
@@ -71,24 +72,42 @@ final class MyPokemonCollectionViewCell: UICollectionViewCell {
     }
     
     @objc func releasebtnAction(_ sender: UIButton) {
-        
         if self.checkingPrimeNumber(num: self.generateRandomNumber()) {
-            print("RELEASE")
+            self.deletePokemonData(nickName: self.nameLabel.text!) { string in
+                self.showToast(subtitle: string)
+                self.delegate?.succedUpdate()
+            }
         }else{
-            print("FAILED")
+            self.showErrorToast(subtitle: "This is not Prime Number")
         }
         
     }
     
     @objc func renamebtnAction(_ sender: UIButton) {
         self.updatePokemonNickname(nickName: self.nameLabel.text!) { string in
-            if string == "saved" {
-                print("SUCCED")
-                self.delegate?.succedUpdate()
-            }else{
-                print("FAILED")
-            }
+            self.showToast(subtitle: string)
+            self.delegate?.succedUpdate()
         }
+    }
+    
+    private func showToast(subtitle: String) {
+        let toast = Toast.default(
+            image: UIImage(systemName: "checkmark.seal.fill")!,
+            title: "Done!",
+            subtitle: subtitle,
+            config: .init(direction: .top, autoHide: true, enablePanToClose: true, displayTime: 3, animationTime: 0.2, enteringAnimation: .default, exitingAnimation: .default, attachTo: nil)
+        )
+        toast.show()
+    }
+    
+    private func showErrorToast(subtitle: String) {
+        let toast = Toast.default(
+            image: UIImage(systemName: "checkmark.seal.fill")!,
+            title: "Error!",
+            subtitle: subtitle,
+            config: .init(direction: .top, autoHide: true, enablePanToClose: true, displayTime: 3, animationTime: 0.2, enteringAnimation: .default, exitingAnimation: .default, attachTo: nil)
+        )
+        toast.show()
     }
     
     func configureCell(name: String, image: UIImage) {

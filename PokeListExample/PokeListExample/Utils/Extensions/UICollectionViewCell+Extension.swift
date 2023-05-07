@@ -90,12 +90,33 @@ extension UICollectionViewCell {
         
         do {
             try context.save()
-            completion("saved")
+            completion("\(nickName) rename success")
         } catch let error as NSError  {
             print("Could not save \(error), \(error.userInfo)")
         }
     }
     
+    func deletePokemonData(nickName: String, completion: @escaping(String) -> Void) {
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        let context = delegate.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: K.CoreData.Entity)
+        fetchRequest.predicate = NSPredicate(format: "nickname == %@", nickName)
+        fetchRequest.returnsObjectsAsFaults = false
+        
+        let result = try? context.fetch(fetchRequest)
+        let resultData = result as! [SavedPokemon]
+        
+        for object in resultData {
+            context.delete(object)
+        }
+        
+        do {
+            try context.save()
+            completion("\(nickName) was released")
+        } catch let error as NSError  {
+            print("Could not delete \(error), \(error.userInfo)")
+        }
+    }
 }
 
 extension String {
