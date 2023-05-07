@@ -19,6 +19,7 @@ final class PokemonRouter: PokemonRoutable {
     // MARK: - Public functions
     func routeToDetailView(withPokemonContainer container: PokemonContainer) {
         let detailView = ModuleBuilder.shared.PokemonDetailBuild(fromContainer: container)
+        detailView.modalPresentationStyle = .fullScreen
         navigationController?.present(detailView, animated: true)
     }
 }

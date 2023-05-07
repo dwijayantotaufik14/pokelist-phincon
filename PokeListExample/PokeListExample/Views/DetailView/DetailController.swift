@@ -58,7 +58,7 @@ final class DetailController: ViewController<DetailView>, UITextFieldDelegate {
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        navigationController?.setNavbarApp(color: .cyan)
+        navigationController?.setNavbarApp(color: .lightGray)
     }
 
     // MARK: - Private functions
@@ -77,7 +77,7 @@ final class DetailController: ViewController<DetailView>, UITextFieldDelegate {
         if randomNum == 1 {
             var nicknameTextfield: UITextField?
             // Declare Alert message
-            let dialogMessage = UIAlertController(title: "Alert Title", message: "Please provide your ID", preferredStyle: .alert)
+            let dialogMessage = UIAlertController(title: "Alert Title", message: "Please Provide Nickname for Your Pokemon", preferredStyle: .alert)
             
             // Create OK button with action handler
             let ok = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
@@ -105,7 +105,7 @@ final class DetailController: ViewController<DetailView>, UITextFieldDelegate {
             dialogMessage.addTextField { (textField) -> Void in
                 nicknameTextfield = textField
                 nicknameTextfield?.delegate = self
-                nicknameTextfield?.placeholder = "Type in your ID"
+                nicknameTextfield?.placeholder = "Nickname"
                 nicknameTextfield?.addTarget(self, action: #selector(self.textFieldChanged(_:)), for: .editingChanged)
             }
             

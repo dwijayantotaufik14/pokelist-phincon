@@ -15,8 +15,8 @@ extension UICollectionView {
 
     typealias SearchDataSource = DiffableDataSource<PokemonListView.Section, PokemonListView.Item>
 
-    /// A diffable data source object with a `PokedexCell` cell and a `SpinnerFooterView` footer view.
-    /// Used in the collection view in the `PokedexView`.
+    /// A diffable data source object with a `PokemonListCell` cell and a `SpinnerFooterView` footer view.
+    /// Used in the collection view in the `PokemonListView`.
     /// - parameters:
     ///     - data: The given pokemon array
     ///     - delegate: The collection view delegate

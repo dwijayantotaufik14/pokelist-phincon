@@ -18,7 +18,7 @@ class ModuleBuilder {
         let interactor = PokemonInteractor(router: router, service: .default)
         let viewController = PokemonController(viewModel: .init(), interactor: interactor)
         let navigationController = NavigationController(rootViewController: viewController)
-        navigationController.setNavbarApp(color: .cyan)
+        navigationController.setNavbarApp(color: .lightGray)
         interactor.view = viewController
         router.navigationController = navigationController
         return navigationController
@@ -29,19 +29,19 @@ class ModuleBuilder {
         let viewModel = DetailView.ViewModel(pokemon: container.pokemon, color: color)
         let detailView = DetailController(viewModel: viewModel)
         let navigationController = NavigationController(rootViewController: detailView)
-        let interaction = Transition.Interaction(viewController: navigationController, cell: container.cell, image: container.image)
+        /*let interaction = Transition.Interaction(viewController: navigationController, cell: container.cell, image: container.image)
         let transitionManager = Transition(interaction: interaction, cell: container.cell)
         navigationController.transitioningDelegate = transitionManager
         navigationController.transitionManager = transitionManager
         navigationController.modalPresentationStyle = .custom
-        navigationController.setNavbarApp(color: color)
+        navigationController.setNavbarApp(color: color)*/
         return navigationController
     }
     
     func MyPokemonBuild() -> UINavigationController {
         let viewController = MyPokemonController()
         let navigationController = NavigationController(rootViewController: viewController)
-        navigationController.setNavbarApp(color: .cyan)
+        navigationController.setNavbarApp(color: .lightGray)
         return navigationController
     }
 }
